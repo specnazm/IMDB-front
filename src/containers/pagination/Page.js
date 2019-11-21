@@ -4,25 +4,25 @@ import MovieList from '../../component/MovieList';
 import { getMovies } from '../../store/actions/MovieActions';
 import { connect } from 'react-redux';
 
+const perPage = 10;
 
  class Page extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1,
-      pageCount: 1
+      currentPage: 1
     };
   }
   componentDidMount() {
-    this.props.getMovies(this.state.currentPage);
+    this.props.getMovies(this.state.currentPage, perPage);
   }
 
   handlePageClick = data => {
     let selected = data.selected + 1;
 
     this.setState({ currentPage: selected }, () => {
-      this.props.getMovies(this.state.currentPage);
+      this.props.getMovies(this.state.currentPage, perPage);
     });
   };
 
@@ -35,9 +35,9 @@ import { connect } from 'react-redux';
           nextLabel={'next'}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={this.state.pageCount}
+          pageCount={this.props.pageCount}
           marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={2}
           onPageChange={this.handlePageClick}
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
@@ -50,6 +50,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
+    pageCount: state.movie.pageCount
   };
 };
 
