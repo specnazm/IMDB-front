@@ -49,7 +49,6 @@ class AuthService extends ApiService {
   };
 
   signup = async signupData => {
-    console.log(signupData);
     const { data } = await this.apiClient.post(ENDPOINTS.REGISTER, signupData);
 
     return data;

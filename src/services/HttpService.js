@@ -43,6 +43,7 @@ class HttpService {
 const options = {
   baseURL: config.API_BASE_URL
 };
+
 const httpService = new HttpService(options);
 
 export default httpService;
