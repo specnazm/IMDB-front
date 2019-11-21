@@ -1,48 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
+import { FormattedMessage } from 'react-intl';
+import { Link as RouterLink } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 import { logIn } from '../../store/actions/AuthActions';
+import messages from './messages';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LoginForm from './LoginForm';
+import { paper, avatar } from '../../styles/FormStyle';
+
 
 class Login extends Component {
-  state = {
-    email: '',
-    password: ''
-  };
-
-  handleInputChange = field => event => this.setState({ [field]: event.target.value });
-
-  submit = event => {
-    event.preventDefault();
-
-    let logInData = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.logIn(logInData);
-  };
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.submit}>
-          <h2>Log In</h2>
-          <input
-            type="text"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleInputChange('email')}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleInputChange('password')}
-          />
-          <input type="submit" value="Log in" />
-          {this.props.loginError && <p>Login error</p>}
-        </form>
-      </div>
+      <Container component="main" maxWidth="xs">
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
+        <Paper style={paper}>
+          <Avatar style={avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            <FormattedMessage {...messages.loginTitle} />
+          </Typography>
+              <Grid>
+                <Divider />
+                <LoginForm onSubmit={logIn}/>
+              </Grid>
+        </Paper>
+      </Container>
     );
   }
 }
