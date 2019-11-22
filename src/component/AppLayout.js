@@ -1,34 +1,47 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
-import Home from '../containers/Home';
+import Dashboard from '../containers/Dashboard/Dashboard';
+import WelcomePage from '../containers/WelcomePage'
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { authUser } from '../store/actions/AuthActions';
+import PrivateRoute from '../containers/PrivateRoute';
+import PublicRoute from '../containers/PublicRoute';
+
+import {
+  WELCOME,
+  DASHBOARD,
+  LOGIN,
+  REGISTER,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
+  USER_PROFILE
+} from '../routes'
+
 
 class AppLayout extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
       if (this.props.user) {
-        this.props.history.push('/home');
+        this.props.history.push(DASHBOARD);
       } else {
-        this.props.history.push('/login');
+        this.props.history.push(LOGIN);
       }
     }
   }
 
   render() {
-    return this.props.user ? (
-      <div>
-        <Route exact path="/home" component={Home} />
-      </div>
-    ) : (
-      <div>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </div>
+      return (
+        <BrowserRouter>
+        <Switch>
+          <PublicRoute restricted={false} component={WelcomePage} path={WELCOME} exact />
+          <PublicRoute restricted={true} component={Register} path={REGISTER} exact />
+          <PublicRoute restricted={true} component={Login} path={LOGIN} exact />
+          <PrivateRoute component={Dashboard} path={DASHBOARD} exact />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

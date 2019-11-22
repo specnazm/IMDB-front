@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Page from './pagination/Page';
+import Page from '../pagination/Page';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getMovies } from '../store/actions/MovieActions';
+import { getMovies } from '../../store/actions/MovieActions';
 
 
-class Home extends Component {
+class Dashboard extends Component {
   
   render() {
     return (
@@ -33,5 +33,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Home)
+  )(Dashboard)
 );
