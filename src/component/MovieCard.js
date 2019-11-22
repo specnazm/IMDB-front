@@ -18,7 +18,7 @@ const MovieCard = ({ movie }) => {
     <Card style={card}>
     <CardActionArea>
       <CardMedia
-        className={media}
+        style={media}
         image={movie.image_url}
         title={movie.title} 
       />

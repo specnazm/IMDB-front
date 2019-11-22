@@ -3,21 +3,17 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
-import Dashboard from '../containers/Dashboard/Dashboard';
+import Dashboard from '../containers/Dashboard';
 import WelcomePage from '../containers/WelcomePage'
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { authUser } from '../store/actions/AuthActions';
 import PrivateRoute from '../containers/PrivateRoute';
 import PublicRoute from '../containers/PublicRoute';
-
 import {
   WELCOME,
   DASHBOARD,
   LOGIN,
-  REGISTER,
-  FORGOT_PASSWORD,
-  RESET_PASSWORD,
-  USER_PROFILE
+  REGISTER
 } from '../routes'
 
 

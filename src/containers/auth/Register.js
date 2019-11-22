@@ -11,16 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
 import { register } from '../../store/actions/AuthActions';
 import messages from './messages';
 import { paper, avatar } from '../../styles/FormStyle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import RegisterForm from './RegisterForm'
-
-import { withFormikField } from '../../utils/withFormikField';
-
-const FormikTextField = withFormikField(TextField);
 
 class Register extends Component {
 

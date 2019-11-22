@@ -50,7 +50,7 @@ const perPage = 10;
 
 const mapStateToProps = state => {
   return {
-    pageCount: state.movie.pageCount
+    pageCount: state.movie.pageCount ? state.movie.pageCount : 1
   };
 };
 
