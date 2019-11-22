@@ -5,8 +5,13 @@ const ENDPOINTS = {
 };
 
 class MovieService extends ApiService {
-  getMovies = () => {
-    return this.apiClient.get(ENDPOINTS.MOVIES);
+  getMovies = (page, perPage) => {
+     return this.apiClient.get(ENDPOINTS.MOVIES, {
+      params: {
+        limit: perPage,
+        page: page
+      }
+    });
   };
 }
 
