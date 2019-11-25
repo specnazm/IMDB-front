@@ -24,11 +24,6 @@ class Dashboard extends Component {
         <Page perPage={10} />
       </Typography>
     </Container>
-      // <div>
-      //   <p>Welcome to Pocket IMDb</p>
-      //   <h4>Movies</h4>
-      //   <Page perPage={10}/>
-      // </div>
     );
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { LOGIN } from '../../routes';
+import { WELCOME } from '../../routes';
 
 export function PrivateRoute({
   component: Component,
@@ -12,7 +12,7 @@ export function PrivateRoute({
 }) {
   return (
     <Route {...rest} 
-        render={props => isAuthenticated ? <Component {...props} /> : <Redirect to={LOGIN} />}
+        render={props => isAuthenticated ? <Component {...props} /> : <Redirect to={WELCOME} />}
     />
   );
 }

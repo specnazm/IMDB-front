@@ -11,7 +11,7 @@ import { root, main, button } from '../../styles/WelcomPageStyle';
 import { LOGIN, REGISTER } from '../../routes'
   
 
-export function WelcomePage() {
+ function WelcomePage() {
 
   return (
     <div style={root}>

@@ -9,11 +9,13 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import { authUser } from '../store/actions/AuthActions';
 import PrivateRoute from '../containers/PrivateRoute';
 import PublicRoute from '../containers/PublicRoute';
+import MoviePage from '../containers/MoviePage';
 import {
   WELCOME,
   DASHBOARD,
   LOGIN,
-  REGISTER
+  REGISTER,
+  SINGLE_MOVIE_PAGE
 } from '../routes'
 
 
@@ -36,6 +38,7 @@ class AppLayout extends React.Component {
           <PublicRoute restricted={true} component={Register} path={REGISTER} exact />
           <PublicRoute restricted={true} component={Login} path={LOGIN} exact />
           <PrivateRoute component={Dashboard} path={DASHBOARD} exact />
+          <PrivateRoute component={MoviePage} path={SINGLE_MOVIE_PAGE} exact />
         </Switch>
       </BrowserRouter>
     );

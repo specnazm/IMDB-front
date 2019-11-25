@@ -11,7 +11,6 @@ export function* userLogin({ payload }) {
 
     yield put(authUser(true));
     yield put(push(DASHBOARD));
-    yield put(go());
   } catch (error) {
     yield put(loginError(true));
   }
@@ -20,9 +19,7 @@ export function* userLogin({ payload }) {
 export function* userRegister({ payload }) {
   try {
     yield call(AuthService.signup, payload);
-
     yield put(push(LOGIN));
-    yield put(go());
   } catch (error) {
     yield put(registerError(true));
   }

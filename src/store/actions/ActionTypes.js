@@ -10,3 +10,5 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const SET_MOVIES = 'SET_MOVIES';
 
 export const SET_PAGE_COUNT = 'SET_PAGE_COUNT';
+export const SET_SELECTED_MOVIE = 'SET_SELECTED_MOVIE';
+export const GET_MOVIE_PAGE = 'GET_MOVIE_PAGE';

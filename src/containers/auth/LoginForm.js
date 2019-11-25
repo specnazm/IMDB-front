@@ -10,7 +10,6 @@ import messages from './messages';
 import Button from '@material-ui/core/Button';
 import { loginSchema } from './validations';
 import { formStyle, submitButton } from '../../styles/FormStyle';
-
 import { withFormikField } from '../../utils/withFormikField';
 
 const FormikTextField = withFormikField(TextField);
