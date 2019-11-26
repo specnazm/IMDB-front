@@ -1,25 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Login from '../containers/auth/Login';
-import Register from '../containers/auth/Register';
-import Dashboard from '../containers/Dashboard';
-import WelcomePage from '../containers/WelcomePage'
-import { BrowserRouter, Switch } from 'react-router-dom';
 import { authUser } from '../store/actions/AuthActions';
-import PrivateRoute from '../containers/PrivateRoute';
-import PublicRoute from '../containers/PublicRoute';
-import MoviePage from '../containers/MoviePage';
+import Routes from './Routes';
 import {
-  WELCOME,
   DASHBOARD,
-  LOGIN,
-  REGISTER,
-  SINGLE_MOVIE_PAGE
+  LOGIN
 } from '../routes'
 
 
-class AppLayout extends React.Component {
+export default class AppLayout extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
       if (this.props.user) {
@@ -32,15 +22,7 @@ class AppLayout extends React.Component {
 
   render() {
       return (
-        <BrowserRouter>
-        <Switch>
-          <PublicRoute restricted={false} component={WelcomePage} path={WELCOME} exact />
-          <PublicRoute restricted={true} component={Register} path={REGISTER} exact />
-          <PublicRoute restricted={true} component={Login} path={LOGIN} exact />
-          <PrivateRoute component={Dashboard} path={DASHBOARD} exact />
-          <PrivateRoute component={MoviePage} path={SINGLE_MOVIE_PAGE} exact />
-        </Switch>
-      </BrowserRouter>
+        <Routes />
     );
   }
 }
@@ -56,10 +38,3 @@ const mapDispatchToProps = () => {
     authUser
   };
 };
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppLayout)
-);

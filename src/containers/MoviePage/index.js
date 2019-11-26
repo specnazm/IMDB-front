@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getMovie } from '../../store/actions/MovieActions';
-import { movieService } from '../../services/MovieService';
 
 
 class MoviePage extends Component {
