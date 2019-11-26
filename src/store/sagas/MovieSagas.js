@@ -21,10 +21,7 @@ export function* moviesGet(action) {
 export function* movieGet(action) {
   try {
     const { data } = yield call(() => movieService.getMovie(action.id));
- //  const path = SINGLE_MOVIE_PAGE.replace(":id", action.id);
     yield put(setMovie(data));
-    // yield put(push(path));
-    // yield put(go());
   } catch (error) {
     console.log({ error });
   }

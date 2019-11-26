@@ -29,9 +29,9 @@ export const getMovie = id => {
   }
 };
 
-export const setMovie = movie => {
+export const setMovie = payload => {
   return {
     type: SET_SELECTED_MOVIE,
-    movie
+    payload
   }
 };

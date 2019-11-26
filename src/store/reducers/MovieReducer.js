@@ -3,7 +3,7 @@ import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE } from '../actions/Actio
 const initialState = {
   all: [],
   pageCount: null,
-  selected: {}
+  selected: { movie: {}, reactions: {}}
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,7 +13,7 @@ const movieReducer = (state = initialState, action) => {
       return {...state, pageCount: action.pageCount}
     case SET_SELECTED_MOVIE:
       console.log(action.movie);
-      return {...state, selected: action.movie};
+      return {...state, selected: action.payload};
     default:
       return state;
   }

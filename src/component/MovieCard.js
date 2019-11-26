@@ -17,7 +17,7 @@ class MovieCard extends Component  {
   render () {
   return (
     <Card style={card}>
-    <CardActionArea onClick={this.handle}>
+    <CardActionArea >
       <CardMedia
         component={RouterLink}
         to={SINGLE_MOVIE_PAGE.replace(":id", this.props.movie.id)}
