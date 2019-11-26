@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
-import { Link as RouterLink } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';

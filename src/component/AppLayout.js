@@ -1,34 +1,28 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import Login from '../containers/auth/Login';
-import Register from '../containers/auth/Register';
-import Home from '../containers/Home';
 import { authUser } from '../store/actions/AuthActions';
+import Routes from './Routes';
+import {
+  DASHBOARD,
+  LOGIN
+} from '../routes'
 
-class AppLayout extends React.Component {
+
+export default class AppLayout extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
       if (this.props.user) {
-        this.props.history.push('/home');
+        this.props.history.push(DASHBOARD);
       } else {
-        this.props.history.push('/login');
+        this.props.history.push(LOGIN);
       }
     }
   }
 
   render() {
-    return this.props.user ? (
-      <div>
-        <Route exact path="/home" component={Home} />
-      </div>
-    ) : (
-      <div>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </div>
+      return (
+        <Routes />
     );
   }
 }
@@ -44,10 +38,3 @@ const mapDispatchToProps = () => {
     authUser
   };
 };
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppLayout)
-);

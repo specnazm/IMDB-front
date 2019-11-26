@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { card, media } from '../styles/MovieStyle';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,27 +7,30 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Register from '../containers/auth/Register';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { SINGLE_MOVIE_PAGE } from '../routes';
 
+class MovieCard extends Component  {
 
-const MovieCard = ({ movie }) => {
+  render () {
   return (
     <Card style={card}>
-    <CardActionArea>
+    <CardActionArea >
       <CardMedia
-        className={media}
-        image={movie.image_url}
-        title={movie.title} 
+        component={RouterLink}
+        to={SINGLE_MOVIE_PAGE.replace(":id", this.props.movie.id)}
+        style={media}
+        image={this.props.movie.image_url}
+        title={this.props.movie.title} 
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          {movie.title}
+          {this.props.movie.title}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {movie.description.slice(0,150)}
+          {this.props.movie.description.slice(0,150)}
         </Typography>
       </CardContent>
     </CardActionArea>
@@ -35,24 +38,27 @@ const MovieCard = ({ movie }) => {
       <Button size="small" color="primary">
         Like
       </Button>
-      <Button size="small" color="primary"> 
+      <Button 
+          component={RouterLink}
+          to={SINGLE_MOVIE_PAGE.replace(":id", this.props.movie.id)}
+          size="small" 
+          color="primary"
+          > 
         Learn More
       </Button>
-      <Route exact path="/register" component={Register} />
     </CardActions>
   </Card>
 );
 };
+}
+
 
 const mapStateToProps = state => {
   return {
-    user: state.authUser
   };
 };
 
-const mapDispatchToProps = () => {
-  return {
-  };
+const mapDispatchToProps = {
 };
 
 export default withRouter(

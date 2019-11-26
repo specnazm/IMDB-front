@@ -1,15 +1,18 @@
-import { SET_MOVIES, SET_PAGE_COUNT } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
-  pageCount: null
+  pageCount: null,
+  selected: { movie: {}, reactions: {}}
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MOVIES:
       return { ...state, all: action.payload };
     case SET_PAGE_COUNT:
-      return {...state, pageCount: action.pageCount};
+      return {...state, pageCount: action.pageCount}
+    case SET_SELECTED_MOVIE:
+      return {...state, selected: action.payload};
     default:
       return state;
   }

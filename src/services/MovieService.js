@@ -1,7 +1,8 @@
 import ApiService from './ApiService';
 
 const ENDPOINTS = {
-  MOVIES: '/api/movies'
+  MOVIES: '/api/movies',
+  MOVIE: '/api/movies/:id'
 };
 
 class MovieService extends ApiService {
@@ -13,6 +14,7 @@ class MovieService extends ApiService {
       }
     });
   };
+  getMovie = id => this.apiClient.get(ENDPOINTS.MOVIE.replace(":id", id));
 }
 
 export const movieService = new MovieService();
