@@ -9,9 +9,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-
-
+import LikeIcon from '@material-ui/icons/ThumbUpAlt';
+import DislikeIcon from '@material-ui/icons/ThumbDownAlt';
+import { IconButton } from '@material-ui/core';
 
 class MoviePage extends Component {
 
@@ -21,31 +21,28 @@ class MoviePage extends Component {
         this.props.getMovie($id);
     }
     render() {
-    
-      const movie = this.props.movieInfo.movie;
-      const reactions = this.props.movieInfo.reactions;
-      console.log(movie);
-      console.log(reactions);
+      const { image_url, title, description } = this.props.movieInfo.movie;
+      const { likes, dislikes } = this.props.movieInfo.reactions;
       return (
         <Card style={card}>
         <CardActionArea>
           <CardMedia
             style={media}
-            image={movie.image_url}
-            title={movie.title} 
+            image={image_url}
+            title={title} 
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {movie.title}
+              {title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {movie.description}
+              {description}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">Like</Button>
-          <Button size="small" color="primary">Dislike</Button>
+          <IconButton  color="success" size="small"onClick={()=>console.log('da')}><LikeIcon></LikeIcon>{likes}</IconButton>
+          <IconButton  color="success" size="small"onClick={()=>console.log('da')}><DislikeIcon></DislikeIcon>{dislikes}</IconButton>
         </CardActions>
       </Card>
       );

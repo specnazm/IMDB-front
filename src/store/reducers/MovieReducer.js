@@ -12,7 +12,6 @@ const movieReducer = (state = initialState, action) => {
     case SET_PAGE_COUNT:
       return {...state, pageCount: action.pageCount}
     case SET_SELECTED_MOVIE:
-      console.log(action.movie);
       return {...state, selected: action.payload};
     default:
       return state;

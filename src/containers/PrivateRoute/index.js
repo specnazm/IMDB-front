@@ -23,7 +23,7 @@ PrivateRoute.propTypes = {
 
 const mapStateToProps = state => {
     return {
-      isAuthenticated: state.authUser ? true: false
+      isAuthenticated: !!state.authUser
     };
   };
 

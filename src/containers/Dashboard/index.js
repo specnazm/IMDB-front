@@ -10,7 +10,6 @@ import messages from './messages';
 import { getMovies } from '../../store/actions/MovieActions';
 import { container } from '../../styles/DashboardStyle';
 
-
 class Dashboard extends Component {
   
   render() {
