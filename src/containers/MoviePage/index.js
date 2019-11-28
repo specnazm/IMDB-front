@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getMovie } from '../../store/actions/MovieActions';
+import { getMovie, addReaction } from '../../store/actions/MovieActions';
 import { card, media } from '../../styles/MovieStyle'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import LikeIcon from '@material-ui/icons/ThumbUpAlt';
 import DislikeIcon from '@material-ui/icons/ThumbDownAlt';
 import { IconButton } from '@material-ui/core';
+import { LIKE, DISLIKE, LIKE_BUTTON, DISLIKE_BUTTON } from '../../utils/constants'
+import { buttonColor } from '../../utils/utils';
 
 class MoviePage extends Component {
 
@@ -20,9 +22,15 @@ class MoviePage extends Component {
       if (!this.props.selected)
         this.props.getMovie($id);
     }
+
+    handleReactionClick(newReaction, oldReaction, id) {
+      if (newReaction === oldReaction)
+          newReaction = null;
+      this.props.addReaction(id, newReaction, oldReaction)
+    }
+ 
     render() {
-      const { image_url, title, description } = this.props.movieInfo.movie;
-      const { likes, dislikes } = this.props.movieInfo.reactions;
+      const { id, image_url, title, description, likes_count, dislikes_count, user_reaction } = this.props.movie;
       return (
         <Card style={card}>
         <CardActionArea>
@@ -41,8 +49,16 @@ class MoviePage extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton  color="success" size="small"onClick={()=>console.log('da')}><LikeIcon></LikeIcon>{likes}</IconButton>
-          <IconButton  color="success" size="small"onClick={()=>console.log('da')}><DislikeIcon></DislikeIcon>{dislikes}</IconButton>
+          <IconButton  
+              color={buttonColor(LIKE_BUTTON,user_reaction)} 
+              size="small" 
+              onClick={() => this.handleReactionClick(LIKE, user_reaction, id)}
+             ><LikeIcon></LikeIcon>{likes_count}</IconButton>
+          <IconButton  
+              color={buttonColor(DISLIKE_BUTTON,user_reaction)} 
+              size="small"
+              onClick={() => this.handleReactionClick(DISLIKE, user_reaction, id)}
+              ><DislikeIcon></DislikeIcon>{dislikes_count}</IconButton>
         </CardActions>
       </Card>
       );
@@ -52,12 +68,13 @@ class MoviePage extends Component {
 
 const mapStateToProps = state => {
     return {
-      movieInfo: state.movie.selected
+      movie: state.movie.selected || {}
     };
   };
   
   const mapDispatchToProps = {
-    getMovie
+    getMovie,
+    addReaction
   };
   
   export default withRouter(
@@ -66,4 +83,3 @@ const mapStateToProps = state => {
       mapDispatchToProps
     )(MoviePage)
   );
-  

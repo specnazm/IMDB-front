@@ -1,4 +1,13 @@
-import { GET_MOVIES, SET_MOVIES, SET_PAGE_COUNT, GET_MOVIE_PAGE, SET_SELECTED_MOVIE } from './ActionTypes';
+import { 
+  GET_MOVIES, 
+  SET_MOVIES, 
+  SET_PAGE_COUNT, 
+  GET_MOVIE_PAGE, 
+  SET_SELECTED_MOVIE, 
+  ADD_REACTION, 
+  SET_REACTION,
+  SET_REACTION_SELECTED
+ } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
   return {
@@ -8,7 +17,7 @@ export const getMovies = (page, perPage) => {
   };
 };
 
-export const setMovies = ({ data: payload }) => {
+export const setMovies = ({ data: payload })=> {
   return {
     type: SET_MOVIES,
     payload
@@ -29,9 +38,36 @@ export const getMovie = id => {
   }
 };
 
-export const setMovie = payload => {
+export const setSelected = payload => {
   return {
     type: SET_SELECTED_MOVIE,
     payload
+  }
+};
+
+export const addReaction = (movieId, reaction, old) => {
+  return {
+    type: ADD_REACTION,
+    movieId,
+    reaction,
+    old
+  }
+};
+
+export const setReaction = ({ movieId, reaction, old })=> {
+  return {
+    type: SET_REACTION,
+    movieId,
+    reaction,
+    old
+  }
+};
+
+export const setReactionSelected = ({movieId, reaction, old })=> {
+  return {
+    type: SET_REACTION_SELECTED,
+    reaction,
+    old,
+    movieId
   }
 };

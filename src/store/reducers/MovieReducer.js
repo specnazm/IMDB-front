@@ -1,9 +1,10 @@
-import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, UNDO_REACTION, UNDO_REACTION_SELECTED, SET_REACTION_SELECTED } from '../actions/ActionTypes';
+import { LIKE, DISLIKE } from '../../utils/constants';
 
 const initialState = {
   all: [],
   pageCount: null,
-  selected: { movie: {}, reactions: {}}
+  selected: null,
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,9 +14,43 @@ const movieReducer = (state = initialState, action) => {
       return {...state, pageCount: action.pageCount}
     case SET_SELECTED_MOVIE:
       return {...state, selected: action.payload};
+    case SET_REACTION_SELECTED:
+      let movie = reduceReactions(state.selected, action.reaction);
+      
+      return {...state,  selected: movie};
+   case SET_REACTION:
+      const index = state.all.findIndex(movie => movie.id === action.movieId);
+      movie = reduceReactions( state.all[index], action.reaction);
+      let changedArr = state.all.slice();
+      changedArr[index] = movie;
+
+      return {...state, all : [...changedArr]};
     default:
       return state;
   }
 };
+
+const reduceReactions = (movie,reaction) => {
+  let changedMovie = {...movie};
+  const oldReaction = movie.user_reaction;
+
+  switch(reaction){
+    case null:
+      changedMovie.likes_count -= oldReaction
+      changedMovie.dislikes_count -= oldReaction === DISLIKE;
+      break;
+    case LIKE: 
+    changedMovie.likes_count +=  oldReaction != LIKE;
+    changedMovie.dislikes_count -=  oldReaction === DISLIKE 
+      break;
+    case DISLIKE:
+        changedMovie.dislikes_count += oldReaction != DISLIKE;
+        changedMovie.likes_count -= oldReaction === LIKE;
+      break;
+  }
+  changedMovie.user_reaction = reaction;
+
+  return changedMovie;
+}
 
 export default movieReducer;

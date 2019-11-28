@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import messages from './messages';
 import { getMovies } from '../../store/actions/MovieActions';
 import { container } from '../../styles/DashboardStyle';
+import { PER_PAGE } from '../../utils/constants';
 
 class Dashboard extends Component {
   
@@ -20,7 +21,7 @@ class Dashboard extends Component {
       </Helmet>
       <Typography variant="h2" component="h1" gutterBottom>
         <FormattedMessage {...messages.startProjectHeader} />
-        <Page perPage={10} />
+        <Page perPage={PER_PAGE} />
       </Typography>
     </Container>
     );
