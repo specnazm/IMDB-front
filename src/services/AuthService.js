@@ -18,7 +18,6 @@ class AuthService extends ApiService {
 
     if (token && user) {
       this.setAuthorizationHeader();
-
       this.api.setUnauthorizedCallback(this.destroySession.bind(this));
     }
   };
@@ -27,7 +26,7 @@ class AuthService extends ApiService {
     const token = this.getToken();
     if (token) {
       this.api.attachHeaders({
-        Authorization: `Bearer ${token.access_token}`
+        Authorization: `Bearer ${token}`
       });
     }
   };

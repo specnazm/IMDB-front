@@ -4,7 +4,6 @@ import MovieList from '../../component/MovieList';
 import { getMovies } from '../../store/actions/MovieActions';
 import { connect } from 'react-redux';
 
-const perPage = 10;
 
  class Page extends Component {
   
@@ -15,14 +14,14 @@ const perPage = 10;
     };
   }
   componentDidMount() {
-    this.props.getMovies(this.state.currentPage, perPage);
+    this.props.getMovies(this.state.currentPage, this.props.perPage);
   }
 
   handlePageClick = data => {
     let selected = data.selected + 1;
 
     this.setState({ currentPage: selected }, () => {
-      this.props.getMovies(this.state.currentPage, perPage);
+      this.props.getMovies(this.state.currentPage, this.props.perPage);
     });
   };
 
