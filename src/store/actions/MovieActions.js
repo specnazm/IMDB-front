@@ -6,7 +6,8 @@ import {
   SET_SELECTED_MOVIE, 
   ADD_REACTION, 
   SET_REACTION,
-  UNDO_REACTION } from './ActionTypes';
+  SET_REACTION_SELECTED
+ } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
   return {
@@ -62,11 +63,11 @@ export const setReaction = ({ movieId, reaction, old })=> {
   }
 };
 
-export const undoReaction = ({movieId, reaction, old}) => {
+export const setReactionSelected = ({movieId, reaction, old })=> {
   return {
-    type: UNDO_REACTION,
+    type: SET_REACTION_SELECTED,
+    reaction,
     old,
-    movieId,
-    reaction
+    movieId
   }
 };

@@ -1,10 +1,10 @@
-import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, UNDO_REACTION } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, UNDO_REACTION, UNDO_REACTION_SELECTED, SET_REACTION_SELECTED } from '../actions/ActionTypes';
 import { LIKE, DISLIKE } from '../../utils/constants';
 
 const initialState = {
   all: [],
   pageCount: null,
-  selected: { user_reaction : [], id: null}
+  selected: null,
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,67 +14,43 @@ const movieReducer = (state = initialState, action) => {
       return {...state, pageCount: action.pageCount}
     case SET_SELECTED_MOVIE:
       return {...state, selected: action.payload};
+    case SET_REACTION_SELECTED:
+      let movie = reduceReactions(state.selected, action.reaction);
+      
+      return {...state,  selected: movie};
    case SET_REACTION:
-    
-      const changeSelected = state.selected.id == action.movieId;
-      let movie, changedArr;
-      if (changeSelected) {
-        movie = state.selected;
-      } else{
-        changedArr = state.all.slice();
-        movie = state.all.find(el => el.id == action.movieId);
-      }
-      let { likes_count, dislikes_count, user_reaction } = movie;
-      switch(action.reaction){
-        case null:
-          likes_count -= action.old
-          dislikes_count -= action.old == DISLIKE;
-          break;
-        case LIKE: 
-          likes_count +=  action.old != LIKE;
-          dislikes_count -=  action.old == DISLIKE 
-          break;
-        case DISLIKE:
-            dislikes_count += action.old != DISLIKE;
-          likes_count -=  action.old == LIKE;
-          break;
-      }
-      user_reaction = action.reaction;
+      const index = state.all.findIndex(movie => movie.id === action.movieId);
+      movie = reduceReactions( state.all[index], action.reaction);
+      let changedArr = state.all.slice();
+      changedArr[index] = movie;
 
-      movie = {...movie, likes_count: likes_count, dislikes_count: dislikes_count, user_reaction :user_reaction};
-      if (changeSelected)
-        return {...state,  selected: {...state.selected, likes_count, dislikes_count, user_reaction}};
-      else{
-        const foundIndex = changedArr.findIndex(x => x.id == movie.id);
-        changedArr[foundIndex] = movie;
-        return {...state, all : [...changedArr]}
-      }
-
-    case UNDO_REACTION:
-      //    changeSelected = state.selected.movie != {};
-      //    movie = changeSelected ? state.selected: state.all.find(el => el.id == action.movieId);
-
-      //   { likes_count, dislikes_count, user_reaction } = movie;
-      //   user_reaction = [{reaction: action.old}];
-
-      //   switch(action.old){
-      //     case null:
-      //       likes_count -= action.reaction
-      //       dislikes_count -= action.reaction == DISLIKE;
-      //       break;
-      //     case LIKE: 
-      //       likes_count +=  action.reaction != LIKE;
-      //       dislikes_count -=  action.reaction == DISLIKE 
-      //       break;
-      //     case DISLIKE:  
-      //       dislikes_count += action.old != DISLIKE;
-      //       likes_count -=  action.old == LIKE;
-      //       break;
-      //   }
-      // return {...state,  selected: {...state.selected, likes_count, dislikes_count, user_reaction}};
+      return {...state, all : [...changedArr]};
     default:
       return state;
   }
 };
+
+const reduceReactions = (movie,reaction) => {
+  let changedMovie = {...movie};
+  const oldReaction = movie.user_reaction;
+
+  switch(reaction){
+    case null:
+      changedMovie.likes_count -= oldReaction
+      changedMovie.dislikes_count -= oldReaction === DISLIKE;
+      break;
+    case LIKE: 
+    changedMovie.likes_count +=  oldReaction != LIKE;
+    changedMovie.dislikes_count -=  oldReaction === DISLIKE 
+      break;
+    case DISLIKE:
+        changedMovie.dislikes_count += oldReaction != DISLIKE;
+        changedMovie.likes_count -= oldReaction === LIKE;
+      break;
+  }
+  changedMovie.user_reaction = reaction;
+
+  return changedMovie;
+}
 
 export default movieReducer;

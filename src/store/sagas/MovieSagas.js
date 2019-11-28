@@ -1,17 +1,18 @@
 import { call, put, select } from 'redux-saga/effects';
 import { push, go } from 'connected-react-router'
 import { movieService } from '../../services/MovieService';
-import { setMovies, setPageCount, setSelected, setReaction, undoReaction } from '../actions/MovieActions';
+import { setMovies, setPageCount, setSelected, setReaction, undoReaction, setReactionSelected, undoReactionSelected } from '../actions/MovieActions';
 import { getReactionFromArr } from '../../utils/utils';
 
 const getPageCount = state => state.movie.pageCount;
+const getSelected = state => state.movie.selected;
 
 export function* moviesGet(action) {
   try {
     const { data } = yield call(() => movieService.getMovies(action.page, action.perPage));
     data.data.forEach( movie => movie.user_reaction = getReactionFromArr(movie));
     yield put(setMovies(data));
-    yield put(setSelected({}));
+    yield put(setSelected(null));
     const pageCount = yield select(getPageCount);
     if (!pageCount )
       yield put(setPageCount(data));
@@ -31,10 +32,18 @@ export function* movieGet(action) {
 }
 
 export function* postReaction(action) {
+  const selected = yield select(getSelected);
   try {
-    yield put(setReaction(action));
+    if (selected)
+      yield put(setReactionSelected(action));
+    else
+      yield put(setReaction(action));
     const { data } = yield call(() => movieService.addReaction(action.movieId, action.reaction));
   } catch (error) {
-    yield put(undoReaction(action));
+    action.reaction = action.old;
+    if (selected)
+      yield put(setReactionSelected(action));
+    else
+      yield put(setReaction(action));
   }
 }

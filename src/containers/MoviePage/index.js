@@ -24,7 +24,7 @@ class MoviePage extends Component {
     }
 
     handleReactionClick(newReaction, oldReaction, id) {
-      if (newReaction == oldReaction)
+      if (newReaction === oldReaction)
           newReaction = null;
       this.props.addReaction(id, newReaction, oldReaction)
     }
@@ -68,7 +68,7 @@ class MoviePage extends Component {
 
 const mapStateToProps = state => {
     return {
-      movie: state.movie.selected
+      movie: state.movie.selected || {}
     };
   };
   
