@@ -39,7 +39,7 @@ const movieReducer = (state = initialState, action) => {
           likes_count -=  action.old == LIKE;
           break;
       }
-      user_reaction = [{reaction: action.reaction}];
+      user_reaction = action.reaction;
 
       movie = {...movie, likes_count: likes_count, dislikes_count: dislikes_count, user_reaction :user_reaction};
       if (changeSelected)

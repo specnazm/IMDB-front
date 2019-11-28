@@ -30,8 +30,7 @@ class MoviePage extends Component {
     }
  
     render() {
-      const { id, image_url, title, description, likes_count, dislikes_count } = this.props.movie;
-      const reaction = this.props.movie.user_reaction.length > 0 ? this.props.movie.user_reaction[0].reaction:null;
+      const { id, image_url, title, description, likes_count, dislikes_count, user_reaction } = this.props.movie;
       return (
         <Card style={card}>
         <CardActionArea>
@@ -51,14 +50,14 @@ class MoviePage extends Component {
         </CardActionArea>
         <CardActions>
           <IconButton  
-              color={buttonColor(LIKE_BUTTON,reaction)} 
+              color={buttonColor(LIKE_BUTTON,user_reaction)} 
               size="small" 
-              onClick={() => this.handleReactionClick(LIKE, reaction, id)}
+              onClick={() => this.handleReactionClick(LIKE, user_reaction, id)}
              ><LikeIcon></LikeIcon>{likes_count}</IconButton>
           <IconButton  
-              color={buttonColor(DISLIKE_BUTTON,reaction)} 
+              color={buttonColor(DISLIKE_BUTTON,user_reaction)} 
               size="small"
-              onClick={() => this.handleReactionClick(DISLIKE, reaction, id)}
+              onClick={() => this.handleReactionClick(DISLIKE, user_reaction, id)}
               ><DislikeIcon></DislikeIcon>{dislikes_count}</IconButton>
         </CardActions>
       </Card>
@@ -68,7 +67,6 @@ class MoviePage extends Component {
 };
 
 const mapStateToProps = state => {
-
     return {
       movie: state.movie.selected
     };
@@ -85,4 +83,3 @@ const mapStateToProps = state => {
       mapDispatchToProps
     )(MoviePage)
   );
-  

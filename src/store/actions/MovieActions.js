@@ -37,7 +37,7 @@ export const getMovie = id => {
   }
 };
 
-export const setMovie = payload => {
+export const setSelected = payload => {
   return {
     type: SET_SELECTED_MOVIE,
     payload

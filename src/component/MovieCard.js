@@ -21,14 +21,13 @@ import { addReaction } from '../store/actions/MovieActions';
 class MovieCard extends Component  {
 
   handleReactionClick(newReaction, oldReaction, id) {
-    if (newReaction == oldReaction)
+    if (newReaction === oldReaction)
         newReaction = null;
     this.props.addReaction(id, newReaction, oldReaction)
   }
 
   render () {
-    const { id, image_url, title, description, likes_count, dislikes_count } = this.props.movie;
-    const reaction = this.props.movie.user_reaction.length > 0 ? this.props.movie.user_reaction[0].reaction:null
+    const { id, image_url, title, description, likes_count, dislikes_count, user_reaction:reaction } = this.props.movie;
     return (
     <Card style={card}>
     <CardActionArea >
