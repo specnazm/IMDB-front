@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { DASHBOARD } from '../../routes';
 
-export function PrivateRoute({
+export function PublicRoute({
   component: Component,
   restricted,
   isAuthenticated,
@@ -18,7 +18,7 @@ export function PrivateRoute({
   );
 }
 
-PrivateRoute.propTypes = {
+PublicRoute.propTypes = {
   isAuthenticated: PropTypes.bool
 };
 
@@ -30,4 +30,4 @@ const mapStateToProps = state => {
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(withConnect)(PrivateRoute);
+export default compose(withConnect)(PublicRoute);

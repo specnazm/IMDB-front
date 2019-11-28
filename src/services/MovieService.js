@@ -3,7 +3,8 @@ import ApiService from './ApiService';
 const ENDPOINTS = {
   MOVIES: '/api/movies',
   MOVIE: '/api/movies/:id',
-  REACTION: '/api/reactions'
+  REACTION: '/api/reactions',
+  VISITED: '/api/visited'
 };
 
 class MovieService extends ApiService {
@@ -17,6 +18,9 @@ class MovieService extends ApiService {
     });
   };
   getMovie = id => {
+    this.apiClient.post(ENDPOINTS.VISITED, {
+      id
+    })
     return this.apiClient.get(ENDPOINTS.MOVIE.replace(":id", id)
     )};
 
