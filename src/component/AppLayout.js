@@ -1,7 +1,6 @@
 import React from 'react';
 import { authUser } from '../store/actions/AuthActions';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import Routes from './Routes';
 import { DASHBOARD, LOGIN } from '../routes'
 
@@ -35,9 +34,8 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default withRouter(
+export default 
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AppLayout)
-);
+  )(AppLayout);

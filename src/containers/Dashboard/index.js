@@ -32,9 +32,7 @@ class Dashboard extends Component {
       this.setState({ open: false });
   };
 
-  render() {
-    console.log('render');
-  
+  render() {  
     return (
       <Container maxWidth="lg" style={container}>
       <Helmet>

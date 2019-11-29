@@ -6,7 +6,10 @@ import {
   SET_SELECTED_MOVIE, 
   ADD_REACTION, 
   SET_REACTION,
-  SET_REACTION_SELECTED
+  SET_REACTION_SELECTED,
+  SET_SEARCH_RESULT,
+  SEARCH_MOVIES,
+  SET_SEARCH_PAGE_COUNT
  } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
@@ -29,6 +32,13 @@ export const setPageCount = ({ last_page: pageCount }) => {
     type: SET_PAGE_COUNT,
     pageCount
   };
+};
+
+export const setSearchPageCount = ({ last_page: pageCount }) => {
+  return {
+  type: SET_SEARCH_PAGE_COUNT,
+  pageCount
+};
 };
 
 export const getMovie = id => {
@@ -69,5 +79,22 @@ export const setReactionSelected = ({movieId, reaction, old })=> {
     reaction,
     old,
     movieId
+  }
+};
+
+export const setSearchResult = (data, title)=> {
+  return {
+    type: SET_SEARCH_RESULT,
+    data,
+    title
+  }
+};
+
+export const search = (perPage, title, page = 1)=> {
+  return {
+    type: SEARCH_MOVIES,
+    page,
+    perPage,
+    title
   }
 };

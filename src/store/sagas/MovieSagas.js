@@ -1,6 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
-import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected } from '../actions/MovieActions';
+import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
 
 const getPageCount = state => state.movie.pageCount;
@@ -48,5 +48,16 @@ export function* postReaction(action) {
       yield put(setReactionSelected(action));
     else
       yield put(setReaction(action));
+  }
+}
+
+export function* searchMovie(action) {
+  try {
+    let { data } = yield call(() => movieService.search(action));
+    data.data.forEach( movie => movie.genre = getGenre(movie));
+    yield put(setSearchResult(data.data, action.title));
+    yield put(setSearchPageCount(data));
+  } catch (error) {
+    console.log({ error });
   }
 }

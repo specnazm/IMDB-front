@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { drawerHeader, drawerPaper } from '../../styles/SideBarStyle'
 import Search from './Search';
+import SearchResult from './SearchResult';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 
@@ -28,6 +29,7 @@ export default class SideBar extends Component {
             </div>
             <Divider />
             <Search />
+            <SearchResult />
         </Drawer>
      );
     }   
