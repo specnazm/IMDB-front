@@ -1,7 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
-import { push, go } from 'connected-react-router'
 import { movieService } from '../../services/MovieService';
-import { setMovies, setPageCount, setSelected, setReaction, undoReaction, setReactionSelected, undoReactionSelected } from '../actions/MovieActions';
+import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
 
 const getPageCount = state => state.movie.pageCount;

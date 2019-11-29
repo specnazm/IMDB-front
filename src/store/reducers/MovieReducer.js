@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, UNDO_REACTION, UNDO_REACTION_SELECTED, SET_REACTION_SELECTED } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, SET_REACTION_SELECTED } from '../actions/ActionTypes';
 import { LIKE, DISLIKE } from '../../utils/constants';
 
 const initialState = {
@@ -40,13 +40,14 @@ const reduceReactions = (movie,reaction) => {
       changedMovie.dislikes_count -= oldReaction === DISLIKE;
       break;
     case LIKE: 
-    changedMovie.likes_count +=  oldReaction != LIKE;
+    changedMovie.likes_count +=  oldReaction !== LIKE;
     changedMovie.dislikes_count -=  oldReaction === DISLIKE 
       break;
     case DISLIKE:
-        changedMovie.dislikes_count += oldReaction != DISLIKE;
+        changedMovie.dislikes_count += oldReaction !== DISLIKE;
         changedMovie.likes_count -= oldReaction === LIKE;
       break;
+    default:
   }
   changedMovie.user_reaction = reaction;
 
