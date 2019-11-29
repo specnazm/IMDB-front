@@ -9,12 +9,15 @@ export const buttonColor = (buttonType, reaction) => {
     };
 }   
 
-
-export const getReactionFromArr = ( {user_reaction} )=> {
+export const getReaction = ( {user_reaction} )=> {
     if (user_reaction.length)
         user_reaction = user_reaction[0].reaction;
     else 
        user_reaction = null;
     
     return user_reaction
+}
+
+export const getGenre = ( {genre} )=> {
+    return genre.name.charAt(0).toUpperCase() + genre.name.slice(1);
 }

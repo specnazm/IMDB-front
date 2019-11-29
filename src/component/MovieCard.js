@@ -28,7 +28,7 @@ class MovieCard extends Component  {
   }
 
   render () {
-    const { id, image_url, title, description, likes_count, dislikes_count, visited, user_reaction:reaction } = this.props.movie;
+    const { id, image_url, title, description, likes_count, dislikes_count, genre, visited, user_reaction:reaction } = this.props.movie;
     return (
     <Card style={card}>
     <CardActionArea >
@@ -42,6 +42,9 @@ class MovieCard extends Component  {
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {title}
+        </Typography>
+        <Typography gutterBottom variant="body1" component="h3">
+              {genre}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           {description.slice(0,150)}
