@@ -16,6 +16,7 @@ import messages from './messages';
 import { paper, avatar } from '../../styles/FormStyle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import RegisterForm from './RegisterForm'
+import { LOGIN } from '../../routes';
 
 class Register extends Component {
 
@@ -38,7 +39,7 @@ class Register extends Component {
               </Grid>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link component={RouterLink} to="/login" variant="body2">
+                  <Link component={RouterLink} to={LOGIN} variant="body2">
                     <FormattedMessage {...messages.loginLink} />
                   </Link>
                 </Grid>

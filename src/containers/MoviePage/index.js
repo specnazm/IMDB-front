@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import LikeIcon from '@material-ui/icons/ThumbUpAlt';
 import DislikeIcon from '@material-ui/icons/ThumbDownAlt';
 import { IconButton } from '@material-ui/core';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import { LIKE, DISLIKE, LIKE_BUTTON, DISLIKE_BUTTON } from '../../utils/constants'
 import { buttonColor } from '../../utils/utils';
 
@@ -30,7 +31,7 @@ class MoviePage extends Component {
     }
  
     render() {
-      const { id, image_url, title, description, likes_count, dislikes_count, user_reaction } = this.props.movie;
+      const { id, image_url, title, description, visited, likes_count, dislikes_count, user_reaction } = this.props.movie;
       return (
         <Card style={card}>
         <CardActionArea>
@@ -59,6 +60,7 @@ class MoviePage extends Component {
               size="small"
               onClick={() => this.handleReactionClick(DISLIKE, user_reaction, id)}
               ><DislikeIcon></DislikeIcon>{dislikes_count}</IconButton>
+              <VisibilityOutlinedIcon/><Typography>{visited}</Typography>
         </CardActions>
       </Card>
       );

@@ -13,6 +13,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { SINGLE_MOVIE_PAGE } from '../routes';
 import LikeIcon from '@material-ui/icons/ThumbUpAlt';
 import DislikeIcon from '@material-ui/icons/ThumbDownAlt';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import { IconButton } from '@material-ui/core';
 import { LIKE, DISLIKE, LIKE_BUTTON, DISLIKE_BUTTON } from '../utils/constants';
 import { buttonColor } from '../utils/utils';
@@ -27,7 +28,7 @@ class MovieCard extends Component  {
   }
 
   render () {
-    const { id, image_url, title, description, likes_count, dislikes_count, user_reaction:reaction } = this.props.movie;
+    const { id, image_url, title, description, likes_count, dislikes_count, visited, user_reaction:reaction } = this.props.movie;
     return (
     <Card style={card}>
     <CardActionArea >
@@ -68,7 +69,9 @@ class MovieCard extends Component  {
            color={buttonColor(DISLIKE_BUTTON,reaction)} 
           size="small"
           onClick={() => this.handleReactionClick(DISLIKE, reaction, id)}
-          ><DislikeIcon></DislikeIcon>{dislikes_count}</IconButton>
+          ><DislikeIcon></DislikeIcon>{dislikes_count}
+          </IconButton>
+          <VisibilityOutlinedIcon/><Typography>{visited}</Typography>
     </CardActions>
     </Card>
 );
