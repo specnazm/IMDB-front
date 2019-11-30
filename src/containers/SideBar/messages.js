@@ -6,5 +6,9 @@ export default defineMessages({
   searchHeader: {
     id: `${scope}.search.header`,
     defaultMessage: 'Search movies by title'
+  },
+  popularMoviesHeader: {
+    id: `${scope}.popularMovies.header`,
+    defaultMessage: 'Most popular movies '
   }
 });

@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 let theme = createMuiTheme();
 
-export const drawerWidth = 350;
+export const drawerWidth = 300;
 
 export const drawer = {
     width: drawerWidth,

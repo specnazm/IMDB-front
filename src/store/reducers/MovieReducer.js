@@ -1,10 +1,11 @@
-import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, SET_REACTION_SELECTED } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_PAGE_COUNT, SET_SELECTED_MOVIE, SET_REACTION, SET_REACTION_SELECTED, SET_POPULAR_MOVIES } from '../actions/ActionTypes';
 import { LIKE, DISLIKE } from '../../utils/constants';
 
 const initialState = {
   all: [],
   pageCount: null,
   selected: null,
+  popular: []
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,6 +26,8 @@ const movieReducer = (state = initialState, action) => {
       changedArr[index] = movie;
 
       return {...state, all : [...changedArr]};
+    case SET_POPULAR_MOVIES:
+        return {...state, popular: action.payload}
     default:
       return state;
   }

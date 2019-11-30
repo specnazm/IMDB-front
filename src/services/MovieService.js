@@ -1,4 +1,5 @@
 import ApiService from './ApiService';
+import { POPULAR_LIMIT } from '../utils/constants';
 
 const ENDPOINTS = {
   MOVIES: '/api/movies',
@@ -6,7 +7,8 @@ const ENDPOINTS = {
   REACTION: '/api/reactions',
   VISITED: '/api/visited',
   SEARCH: '/api/search',
-  GENRES: '/api/genres'
+  GENRES: '/api/genres',
+  POPULAR: '/api/popular'
 };
 
 class MovieService extends ApiService {
@@ -47,6 +49,15 @@ class MovieService extends ApiService {
   getGenres = () => {
     return this.apiClient.get(ENDPOINTS.GENRES);
   };
+
+  getPopular = () => {
+    return this.apiClient.get(ENDPOINTS.POPULAR, {
+      params: {
+        limit: POPULAR_LIMIT
+      }
+    });
+  };
+
 }
 
 export const movieService = new MovieService();

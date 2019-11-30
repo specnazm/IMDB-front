@@ -11,7 +11,9 @@ import {
   SEARCH_MOVIES,
   SET_SEARCH_PAGE_COUNT,
   GET_ALL_GENRES,
-  SET_ALL_GENRES
+  SET_ALL_GENRES,
+  GET_POPULAR_MOVIES,
+  SET_POPULAR_MOVIES
  } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
@@ -102,7 +104,7 @@ export const search = ({perPage, title, page = 1, genre})=> {
   }
 };
 
-export const getGenres = ()=> {
+export const getGenres = () => {
   return {
     type: GET_ALL_GENRES
   }
@@ -111,6 +113,19 @@ export const getGenres = ()=> {
 export const setGenres = (payload)=> {
   return {
     type: SET_ALL_GENRES,
+    payload
+  }
+};
+
+export const getPopular = () => {
+  return {
+    type: GET_POPULAR_MOVIES
+  }
+};
+
+export const setPopular = (payload)=> {
+  return {
+    type: SET_POPULAR_MOVIES,
     payload
   }
 };

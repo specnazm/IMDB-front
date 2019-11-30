@@ -10,7 +10,7 @@ const root =  {
   overflow: 'hidden'
 }
 const gridList = {
-  justifyContent: 'space-around',
+  justifyContent: 'space-around'
 }
 
 class MovieList extends Component {
