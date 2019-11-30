@@ -5,7 +5,8 @@ let theme = createMuiTheme();
 
 export const container =  {
     paddingTop: theme.spacing(10),
-    paddingBottom: theme.spacing(4),    
+    paddingBottom: theme.spacing(4),
+    paddingRight: theme.spacing(20)
 }
 export const  appBar = {
     transition: theme.transitions.create(['margin', 'width'], {

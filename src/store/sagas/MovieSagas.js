@@ -1,6 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
-import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres } from '../actions/MovieActions';
+import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres, setPopular } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
 
 const getPageCount = state => state.movie.pageCount;
@@ -66,6 +66,15 @@ export function* genresGet(action) {
   try {
     const { data } = yield call(() => movieService.getGenres());
     yield put(setGenres(data));
+  } catch (error) {
+    console.log({ error });
+  }
+}
+
+export function* popularGet(action) {
+  try {
+    const { data } = yield call(() => movieService.getPopular());
+    yield put(setPopular(data));
   } catch (error) {
     console.log({ error });
   }
