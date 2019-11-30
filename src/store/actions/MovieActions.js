@@ -9,7 +9,9 @@ import {
   SET_REACTION_SELECTED,
   SET_SEARCH_RESULT,
   SEARCH_MOVIES,
-  SET_SEARCH_PAGE_COUNT
+  SET_SEARCH_PAGE_COUNT,
+  GET_ALL_GENRES,
+  SET_ALL_GENRES
  } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
@@ -90,11 +92,26 @@ export const setSearchResult = (data, title)=> {
   }
 };
 
-export const search = (perPage, title, page = 1)=> {
+export const search = ({perPage, title, page = 1, genre})=> {
   return {
     type: SEARCH_MOVIES,
     page,
     perPage,
-    title
+    title,
+    genre
   }
 };
+
+export const getGenres = ()=> {
+  return {
+    type: GET_ALL_GENRES
+  }
+};
+
+export const setGenres = (payload)=> {
+  return {
+    type: SET_ALL_GENRES,
+    payload
+  }
+};
+

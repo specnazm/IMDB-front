@@ -5,7 +5,8 @@ const ENDPOINTS = {
   MOVIE: '/api/movies/:id',
   REACTION: '/api/reactions',
   VISITED: '/api/visited',
-  SEARCH: '/api/search?'
+  SEARCH: '/api/search',
+  GENRES: '/api/genres'
 };
 
 class MovieService extends ApiService {
@@ -32,14 +33,19 @@ class MovieService extends ApiService {
     }
     )};
 
-  search = ({page, perPage, title}) => {
+  search = ({page, perPage, title, genre}) => {
     return this.apiClient.get(ENDPOINTS.SEARCH, {
       params: {
         limit: perPage,
         page,
-        title
+        title,
+        genre
       }
     });
+  };
+
+  getGenres = () => {
+    return this.apiClient.get(ENDPOINTS.GENRES);
   };
 }
 

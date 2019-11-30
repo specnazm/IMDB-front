@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import messages from './messages';
-import { getMovies } from '../../store/actions/MovieActions';
+import { getMovies, setSearchResult, setSearchPageCount } from '../../store/actions/MovieActions';
 import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
 import { PER_PAGE } from '../../utils/constants';
 import SideBar from '../SideBar';
@@ -29,7 +29,9 @@ class Dashboard extends Component {
   };
 
   handleSideBarClose = () => {
-      this.setState({ open: false });
+    this.props.setSearchResult([], null);
+    this.props.setSearchPageCount({last_page: 0});
+    this.setState({ open: false });
   };
 
   render() {  
@@ -74,7 +76,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getMovies
+  getMovies, setSearchResult, setSearchPageCount
 };
 
 export default withRouter(

@@ -23,7 +23,7 @@ import { SINGLE_MOVIE_PAGE } from '../../routes';
     let selected = data.selected + 1;
 
     this.setState({ currentPage: selected }, () => {
-      this.props.search(PER_PAGE, this.props.title, this.state.currentPage);
+      this.props.search({perPage: PER_PAGE, title: this.props.title, page: this.state.currentPage});
     });
   };
 

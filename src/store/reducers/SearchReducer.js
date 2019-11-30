@@ -1,9 +1,10 @@
-import { SET_SEARCH_RESULT, SET_SEARCH_PAGE_COUNT } from '../actions/ActionTypes';
+import { SET_SEARCH_RESULT, SET_SEARCH_PAGE_COUNT, SET_ALL_GENRES } from '../actions/ActionTypes';
 
 const initialState = {
   result : [],
   title: null,
-  pageCount: null
+  pageCount: null,
+  genres: []
 };
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +13,9 @@ const searchReducer = (state = initialState, action) => {
         return {...state, result: action.data, title: action.title };
       return {...state, result: action.data };
     case SET_SEARCH_PAGE_COUNT:
-        return {...state, pageCount: action.pageCount }
+      return {...state, pageCount: action.pageCount }
+    case SET_ALL_GENRES:
+      return {...state, genres: action.payload }
     default:
       return state;
   }
