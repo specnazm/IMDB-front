@@ -38,7 +38,7 @@ class CreateMovieForm extends Component {
         <Formik 
           initialValues={{
             title: '',
-          //  genre: '',
+            genre: '',
             image_url: '',
             description: ''
           }}
@@ -83,14 +83,14 @@ class CreateMovieForm extends Component {
             </Grid>
             <Grid item xs={12}>
               <Field
-                component={FormikTextField}
-                type="text"
+                as="select"
                 name="genre"
                 variant="outlined"
                 required
-                fullWidth
                 label={<FormattedMessage {...messages.genreInputLabel} />}
-              />
+              >
+                {this.props.genres.map(genre => <option value={genre.id}>{genre.name}</option>)}
+              </Field>
             </Grid>
           </Grid>
           <Button
