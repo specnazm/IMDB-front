@@ -5,6 +5,6 @@ export const scope = 'dashboard';
 export default defineMessages({
   startProjectHeader: {
     id: `${scope}.start_project.header`,
-    defaultMessage: 'Pocekt IMDB '
+    defaultMessage: 'Pocket IMDB '
   }
 });

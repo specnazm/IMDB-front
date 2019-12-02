@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Page from '../Page';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,24 +9,62 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import messages from './messages';
-import { getMovies } from '../../store/actions/MovieActions';
-import { container } from '../../styles/DashboardStyle';
+import { getMovies, setSearchResult, setSearchPageCount } from '../../store/actions/MovieActions';
+import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
 import { PER_PAGE } from '../../utils/constants';
+import SideBar from '../SideBar';
+
 
 class Dashboard extends Component {
-  
-  render() {
+
+  constructor(props) {
+    super(props);
+    this.state = { open: false };
+  } 
+  handleSideBarOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleSideBarClose = () => {
+    this.props.setSearchResult({data:[], title:null});
+    this.props.setSearchPageCount({pageCount: 0});
+    this.setState({ open: false });
+  };
+
+  render() {  
     return (
       <Container maxWidth="lg" style={container}>
       <Helmet>
         <title>Pocket IMDB</title>
       </Helmet>
-      <Typography variant="h2" component="h1" gutterBottom>
-        <FormattedMessage {...messages.startProjectHeader} />
-        <Page perPage={PER_PAGE} />
+      <CssBaseline />
+        <AppBar
+          position="fixed"
+          style={this.state.open ? appBarShift: appBar}
+          >
+          <Toolbar>
+              <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleSideBarOpen}
+              edge="start"
+              style={ this.state.open ? menuButtonHide: menuButton }
+              >
+              <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            <FormattedMessage {...messages.startProjectHeader} />
+          </Typography>
+          </Toolbar>
+        </AppBar>
+        <SideBar open = {this.state.open}  handleClose = {this.handleSideBarClose} handleOpen={this.handleSideBarOpen}/>
+      <Typography variant="h2" component="h1" gutterBottom style={this.state.open ? appBarShift: appBar} >
+        <Page  perPage={PER_PAGE} />
       </Typography>
-    </Container>
+  </Container>
     );
   }
 }
@@ -35,7 +76,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getMovies
+  getMovies, setSearchResult, setSearchPageCount
 };
 
 export default withRouter(

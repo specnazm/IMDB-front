@@ -14,22 +14,22 @@ import { connect } from 'react-redux';
     };
   }
   componentDidMount() {
-    this.props.getMovies(this.state.currentPage, this.props.perPage);
+    this.props.getMovies({ page: this.state.currentPage, perPage: this.props.perPage});
   }
 
   handlePageClick = data => {
     let selected = data.selected + 1;
 
     this.setState({ currentPage: selected }, () => {
-      this.props.getMovies(this.state.currentPage, this.props.perPage);
+      this.props.getMovies({page: this.state.currentPage, perPage: this.props.perPage});
     });
   };
 
   render() {
     return (
       <div >
-        <MovieList movies={this.state.data} />
-        <ReactPaginate
+        <MovieList movies={this.props.movies} />
+        {this.props.movies.length > 0  && <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
@@ -41,7 +41,7 @@ import { connect } from 'react-redux';
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
           activeClassName={'active'}
-        />
+      /> }
       </div>
     );
   }
@@ -49,7 +49,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    pageCount: state.movie.pageCount || 1
+    pageCount: state.movie.pageCount || 1,
+    movies: state.movie.all
   };
 };
 
