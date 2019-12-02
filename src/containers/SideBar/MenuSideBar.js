@@ -6,13 +6,28 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { drawerHeader, drawerPaper } from '../../styles/SideBarStyle'
 import Search from './Search';
+import AddIcon from '@material-ui/icons/Add';
 import SearchResult from './SearchResult';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
+import CreateMovie from '../Dashboard/CreateMovie';
 
 
-export default class SearchSideBar extends Component {
+export default class MenuSideBar extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { openModal: false };
+    }
+
+    handleOpen = () => {
+        console.log('here');
+       this.setState({ openModal: true })
+    };
+
+    handleClose = () => {
+        this.setState({ openModal: false })
+    };
     render() {
         return (   
             <Drawer
@@ -21,11 +36,23 @@ export default class SearchSideBar extends Component {
                 anchor="left"
                 open={this.props.open}
             >
+            <IconButton 
+                style={{ justifyContent: 'flex-end',}}
+                onClick={this.props.handleClose}><ChevronLeftIcon />
+            </IconButton>
+            <Divider />
             <div style={drawerHeader}> 
+            <Typography variant="h6" noWrap>
+                    <FormattedMessage {...messages.addMovie} />
+                </Typography>
+                <IconButton onClick={this.handleOpen}><AddIcon /></IconButton>
+                <CreateMovie open={this.state.openModal} handleClose={this.handleClose}></CreateMovie>
+            </div>
+            <Divider />
+            <div style={drawerHeader}>
                 <Typography variant="h6" noWrap>
                     <FormattedMessage {...messages.searchHeader} />
                 </Typography>
-                <IconButton onClick={this.props.handleClose}><ChevronLeftIcon /></IconButton>
             </div>
             <Divider />
             <Search />

@@ -58,6 +58,15 @@ class MovieService extends ApiService {
     });
   };
 
+  createMovie = ({title, description, imageUrl, genre}) => {
+    return this.apiClient.post(ENDPOINTS.MOVIES, {
+      title,
+      description,
+      image_url: imageUrl,
+      genre_id: genre
+    });
+  };
+
 }
 
 export const movieService = new MovieService();

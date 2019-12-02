@@ -13,7 +13,9 @@ import {
   GET_ALL_GENRES,
   SET_ALL_GENRES,
   GET_POPULAR_MOVIES,
-  SET_POPULAR_MOVIES
+  ADD_MOVIE,
+  SET_POPULAR_MOVIES,
+  CREATE_MOVIE
  } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
@@ -130,3 +132,16 @@ export const setPopular = (payload)=> {
   }
 };
 
+export const addMovie = (payload)=> {
+  return {
+    type: ADD_MOVIE,
+    payload
+  }
+};
+
+export const createMovie = (payload)=> {
+  return {
+    type: CREATE_MOVIE,
+    payload
+  }
+};
