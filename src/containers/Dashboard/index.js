@@ -29,8 +29,8 @@ class Dashboard extends Component {
   };
 
   handleSideBarClose = () => {
-    this.props.setSearchResult([], null);
-    this.props.setSearchPageCount({last_page: 0});
+    this.props.setSearchResult({data:[], title:null});
+    this.props.setSearchPageCount({pageCount: 0});
     this.setState({ open: false });
   };
 

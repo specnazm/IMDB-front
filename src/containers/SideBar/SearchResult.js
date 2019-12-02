@@ -59,9 +59,9 @@ import { SINGLE_MOVIE_PAGE } from '../../routes';
 
 const mapStateToProps = state => {
     return {
-        searchResult: state.search.result || [],
+        searchResult: state.search.result,
         title : state.search.title,
-        pageCount: state.search.pageCount || 1,
+        pageCount: state.search.pageCount,
     };
 };
 

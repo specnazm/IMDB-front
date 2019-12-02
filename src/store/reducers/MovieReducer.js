@@ -11,16 +11,17 @@ const movieReducer = (state = initialState, action) => {
     case SET_MOVIES:
       return { ...state, all: action.payload };
     case SET_PAGE_COUNT:
-      return {...state, pageCount: action.pageCount}
+      return {...state, pageCount: action.payload.pageCount}
     case SET_SELECTED_MOVIE:
       return {...state, selected: action.payload};
     case SET_REACTION_SELECTED:
-      let movie = reduceReactions(state.selected, action.reaction);
+      let movie = reduceReactions(state.selected, action.payload.reaction);
       
       return {...state,  selected: movie};
    case SET_REACTION:
-      const index = state.all.findIndex(movie => movie.id === action.movieId);
-      movie = reduceReactions( state.all[index], action.reaction);
+      const { movieId, reaction } = action.payload;
+      const index = state.all.findIndex(movie => movie.id === movieId);
+      movie = reduceReactions( state.all[index],reaction);
       let changedArr = state.all.slice();
       changedArr[index] = movie;
 

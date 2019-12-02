@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
@@ -36,10 +35,7 @@ class Search extends Component {
   }
 
   onFilterChange(e) {
-    if(e.target.textContent !== "")
-      this.setState({genreFilter: e.target.textContent});
-    else 
-    this.setState({genreFilter: null });
+    this.setState({genreFilter: e.target.textContent || null});
     this.search();
   }
 

@@ -14,14 +14,14 @@ import { connect } from 'react-redux';
     };
   }
   componentDidMount() {
-    this.props.getMovies(this.state.currentPage, this.props.perPage);
+    this.props.getMovies({ page: this.state.currentPage, perPage: this.props.perPage});
   }
 
   handlePageClick = data => {
     let selected = data.selected + 1;
 
     this.setState({ currentPage: selected }, () => {
-      this.props.getMovies(this.state.currentPage, this.props.perPage);
+      this.props.getMovies({page: this.state.currentPage, perPage: this.props.perPage});
     });
   };
 

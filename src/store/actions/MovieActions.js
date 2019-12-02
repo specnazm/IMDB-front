@@ -14,39 +14,38 @@ import {
   SET_ALL_GENRES
  } from './ActionTypes';
 
-export const getMovies = (page, perPage) => {
+export const getMovies = (payload) => {
   return {
     type: GET_MOVIES,
-    page,
-    perPage
+    payload
   };
 };
 
-export const setMovies = ({ data: payload })=> {
+export const setMovies = (payload)=> {
   return {
     type: SET_MOVIES,
     payload
   };
 };
 
-export const setPageCount = ({ last_page: pageCount }) => {
+export const setPageCount = (payload) => {
     return {
     type: SET_PAGE_COUNT,
-    pageCount
+    payload
   };
 };
 
-export const setSearchPageCount = ({ last_page: pageCount }) => {
+export const setSearchPageCount = (payload) => {
   return {
   type: SET_SEARCH_PAGE_COUNT,
-  pageCount
+  payload
 };
 };
 
-export const getMovie = id => {
+export const getMovie = payload => {
   return {
     type: GET_MOVIE_PAGE,
-    id
+    payload
   }
 };
 
@@ -57,48 +56,38 @@ export const setSelected = payload => {
   }
 };
 
-export const addReaction = (movieId, reaction, old) => {
+export const addReaction = payload => {
   return {
     type: ADD_REACTION,
-    movieId,
-    reaction,
-    old
+    payload
   }
 };
 
-export const setReaction = ({ movieId, reaction, old })=> {
+export const setReaction = payload => {
   return {
     type: SET_REACTION,
-    movieId,
-    reaction,
-    old
+    payload
   }
 };
 
-export const setReactionSelected = ({movieId, reaction, old })=> {
+export const setReactionSelected = payload => {
   return {
     type: SET_REACTION_SELECTED,
-    reaction,
-    old,
-    movieId
+    payload
   }
 };
 
-export const setSearchResult = (data, title)=> {
+export const setSearchResult = payload => {
   return {
     type: SET_SEARCH_RESULT,
-    data,
-    title
+    payload
   }
 };
 
-export const search = ({perPage, title, page = 1, genre})=> {
+export const search = payload => {
   return {
     type: SEARCH_MOVIES,
-    page,
-    perPage,
-    title,
-    genre
+    payload
   }
 };
 
@@ -108,10 +97,9 @@ export const getGenres = ()=> {
   }
 };
 
-export const setGenres = (payload)=> {
+export const setGenres = payload => {
   return {
     type: SET_ALL_GENRES,
     payload
   }
 };
-

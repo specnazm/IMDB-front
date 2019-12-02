@@ -27,7 +27,7 @@ class MoviePage extends Component {
     handleReactionClick(newReaction, oldReaction, id) {
       if (newReaction === oldReaction)
           newReaction = null;
-      this.props.addReaction(id, newReaction, oldReaction)
+      this.props.addReaction({movieId: id, reaction: newReaction, old: oldReaction})
     }
  
     render() {

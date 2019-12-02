@@ -11,7 +11,7 @@ const ENDPOINTS = {
 
 class MovieService extends ApiService {
 
-  getMovies = (page, perPage) => {
+  getMovies = ({page, perPage}) => {
      return this.apiClient.get(ENDPOINTS.MOVIES, {
       params: {
         limit: perPage,
@@ -26,7 +26,7 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.MOVIE.replace(":id", id)
     )};
 
-  addReaction = (id, reaction) => {
+  addReaction = ({movieId :id, reaction}) => {
     return this.apiClient.post(ENDPOINTS.REACTION,{
         id,
         reaction 
