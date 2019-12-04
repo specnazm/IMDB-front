@@ -4,3 +4,5 @@ export const LIKE_BUTTON = 'LIKE_BUTTON';
 export const DISLIKE_BUTTON = 'DISLIKE_BUTTON';
 export const PER_PAGE = 9;
 export const POPULAR_LIMIT = 10;
+export const RELATED = "RELATED";
+export const POPULAR = "POPULAR";

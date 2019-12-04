@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import Container from '@material-ui/core/Container';
+import SideBar from '../SideBar';
+import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
 import { getMovie, addReaction } from '../../store/actions/MovieActions';
 import { card, media } from '../../styles/MovieStyle'
 import Card from '@material-ui/core/Card';
@@ -15,13 +19,19 @@ import { IconButton } from '@material-ui/core';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import { LIKE, DISLIKE, LIKE_BUTTON, DISLIKE_BUTTON } from '../../utils/constants'
 import { buttonColor } from '../../utils/utils';
+import { RELATED } from '../../utils/constants';
 
 class MoviePage extends Component {
 
     componentDidMount() {
-      const $id = this.props.match.params.id;
+      const id = this.props.match.params.id;
       if (!this.props.selected)
-        this.props.getMovie($id);
+        this.props.getMovie(id);
+    }
+    componentDidUpdate() {
+      const id = this.props.match.params.id;
+      if (this.props.movie.id != id)
+        this.props.getMovie(id);
     }
 
     handleReactionClick(newReaction, oldReaction, id) {
@@ -33,6 +43,11 @@ class MoviePage extends Component {
     render() {
       const { id, image_url, title, description, visited, likes_count, dislikes_count, genre, user_reaction } = this.props.movie;
       return (
+        <Container maxWidth="lg" style={container}>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+          <SideBar type={RELATED}/>
         <Card style={card}>
         <CardActionArea>
           <CardMedia
@@ -66,6 +81,7 @@ class MoviePage extends Component {
               <VisibilityOutlinedIcon/><Typography>{visited}</Typography>
         </CardActions>
       </Card>
+      </Container>
       );
     }
    

@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import messages from './messages';
 import { getMovies, setSearchResult, setSearchPageCount } from '../../store/actions/MovieActions';
 import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
-import { PER_PAGE } from '../../utils/constants';
+import { PER_PAGE, POPULAR } from '../../utils/constants';
 import MenuSideBar from '../SideBar/MenuSideBar';
 import SideBar from '../SideBar';
 
@@ -62,7 +62,7 @@ class Dashboard extends Component {
           </Toolbar>
         </AppBar>
         <MenuSideBar open = {this.state.open}  handleClose = {this.handleSideBarClose} handleOpen={this.handleSideBarOpen}/>
-        <SideBar />
+        <SideBar type={POPULAR}/>
         <Typography variant="h2" component="h1" gutterBottom style={this.state.open ? appBarShift: appBar} >
           <Page  perPage={PER_PAGE} />
         </Typography>

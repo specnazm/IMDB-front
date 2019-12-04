@@ -5,6 +5,7 @@ const initialState = {
   all: [],
   pageCount: null,
   selected: null,
+  related: [],
   popular: []
 };
 const movieReducer = (state = initialState, action) => {
@@ -14,7 +15,8 @@ const movieReducer = (state = initialState, action) => {
     case SET_PAGE_COUNT:
       return {...state, pageCount: action.pageCount}
     case SET_SELECTED_MOVIE:
-      return {...state, selected: action.payload};
+
+      return {...state, selected: action.payload.movie, related: action.payload.related };
     case SET_REACTION_SELECTED:
       let movie = reduceReactions(state.selected, action.reaction);
       

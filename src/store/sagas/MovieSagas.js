@@ -29,8 +29,8 @@ export function* moviesGet(action) {
 export function* movieGet(action) {
   try {
     let { data } = yield call(() => movieService.getMovie(action.id));
-    data.user_reaction = getReaction(data);
-    data.genre = getGenre(data);
+    data.movie.user_reaction = getReaction(data.movie);
+    data.movie.genre = getGenre(data.movie);
     yield put(setSelected(data));
   } catch (error) {
     console.log({ error });
