@@ -12,6 +12,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { SINGLE_MOVIE_PAGE } from '../../routes';
 import { connect } from 'react-redux';
+import { POPULAR } from '../../utils/constants';
 
 
 class SideBar extends Component {
@@ -21,6 +22,7 @@ class SideBar extends Component {
     }
 
     render() {
+        const movies = this.props.type === POPULAR ? this.props.popular : this.props.related;
         return (   
             <Drawer
                 style={drawer}
@@ -30,12 +32,13 @@ class SideBar extends Component {
             >
             <div style={drawerHeader}> 
                 <Typography variant="h6" noWrap>
-                    <FormattedMessage {...messages.popularMoviesHeader} />
+                    {this.props.type === POPULAR ? <FormattedMessage {...messages.popularMoviesHeader} /> :
+                    <FormattedMessage {...messages.relatedMoviesHeader} /> }
                 </Typography>
             </div>
             <Divider />
             <List>
-            {this.props.movies.map( movie => (
+            {movies.map( movie => (
             <ListItem key={movie.id}>
               <Link component={RouterLink} to={SINGLE_MOVIE_PAGE.replace(':id', movie.id)} variant="body2">
                 {movie.title}
@@ -50,7 +53,8 @@ class SideBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        movies : state.movie.popular
+        popular : state.movie.popular,
+        related : state.movie.related
     };
 };
   

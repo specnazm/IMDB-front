@@ -2,8 +2,6 @@ import { call, put, select } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
 import { setMovies, addMovie, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres, setPopular } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
-import { DASHBOARD } from '../../routes';
-import { push, go } from 'connected-react-router';
 
 
 const getPageCount = state => state.movie.pageCount;
@@ -16,11 +14,11 @@ export function* moviesGet(action) {
       movie.user_reaction = getReaction(movie);
       movie.genre = getGenre(movie);
     });
-    yield put(setMovies(data));
-    yield put(setSelected(null));
-    const pageCount = yield select(getPageCount);
-    if (!pageCount )
-      yield put(setPageCount(data));
+      yield put(setMovies(data));
+      yield put(setSelected(null));
+      const pageCount = yield select(getPageCount);
+      if (!pageCount)
+        yield put(setPageCount(data));
   } catch (error) {
     console.log({ error });
   }
@@ -29,8 +27,8 @@ export function* moviesGet(action) {
 export function* movieGet(action) {
   try {
     let { data } = yield call(() => movieService.getMovie(action.id));
-    data.user_reaction = getReaction(data);
-    data.genre = getGenre(data);
+    data.movie.user_reaction = getReaction(data.movie);
+    data.movie.genre = getGenre(data.movie);
     yield put(setSelected(data));
   } catch (error) {
     console.log({ error });

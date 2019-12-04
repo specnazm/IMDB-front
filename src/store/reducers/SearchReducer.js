@@ -1,4 +1,4 @@
-import { SET_SEARCH_RESULT, SET_SEARCH_PAGE_COUNT, SET_ALL_GENRES, SEARCH_MOVIES_OMDB } from '../actions/ActionTypes';
+import { SET_SEARCH_RESULT, SET_SEARCH_PAGE_COUNT, SET_ALL_GENRES } from '../actions/ActionTypes';
 
 const initialState = {
   result : [],
