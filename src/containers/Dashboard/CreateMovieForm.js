@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import TextField from '@material-ui/core/TextField';
 import { createMovie } from '../../store/actions/MovieActions';
 import messages from './messages';
-import { search, getGenres } from '../../store/actions/MovieActions';
+import { getGenres } from '../../store/actions/MovieActions';
 import Button from '@material-ui/core/Button';
 import { formStyle, submitButton } from '../../styles/FormStyle';
 import { newMovieSchema } from './validations.js';
@@ -18,7 +18,7 @@ const FormikTextField = withFormikField(TextField);
 class CreateMovieForm extends Component {
   
   componentDidMount(){
-    if (this.props.genres.length == 0){
+    if (this.props.genres.length === 0){
       this.props.getGenres();
     
     }

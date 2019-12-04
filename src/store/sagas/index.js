@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { LOGIN, REGISTER, GET_MOVIES, CREATE_MOVIE, GET_MOVIE_PAGE, ADD_REACTION, SEARCH_MOVIES, GET_ALL_GENRES, GET_POPULAR_MOVIES, SEARCH_MOVIES_OMDB } from '../actions/ActionTypes';
 import { userLogin, userRegister } from './AuthSagas';
-import { moviesGet, movieGet, searchOMDB, postReaction, searchMovie, genresGet, popularGet, movieAdd, movieCreate } from './MovieSagas';
+import { moviesGet, movieGet, searchOMDB, postReaction, searchMovie, genresGet, popularGet, movieCreate } from './MovieSagas';
 
 
 export default function* rootSaga() {

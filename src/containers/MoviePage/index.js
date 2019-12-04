@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Container from '@material-ui/core/Container';
 import SideBar from '../SideBar';
-import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
+import { container} from '../../styles/DashboardStyle';
 import { getMovie, addReaction } from '../../store/actions/MovieActions';
 import { card, media } from '../../styles/MovieStyle'
 import Card from '@material-ui/core/Card';
@@ -25,8 +25,8 @@ class MoviePage extends Component {
 
     componentDidMount() {
       const id = this.props.match.params.id;
-      if (!this.props.selected)
-        this.props.getMovie(id);
+      if (!this.props.movie)
+          this.props.getMovie(id);
     }
     componentDidUpdate() {
       const id = this.props.match.params.id;
@@ -41,7 +41,8 @@ class MoviePage extends Component {
     }
  
     render() {
-      const { id, image_url, title, description, visited, likes_count, dislikes_count, genre, user_reaction } = this.props.movie;
+      const movie = this.props.movie ? this.props.movie : {};
+      const { id, image_url, title, description, visited, likes_count, dislikes_count, genre, user_reaction } = movie;
       return (
         <Container maxWidth="lg" style={container}>
         <Helmet>
@@ -89,7 +90,7 @@ class MoviePage extends Component {
 
 const mapStateToProps = state => {
     return {
-      movie: state.movie.selected || {}
+      movie: state.movie.selected
     };
   };
   

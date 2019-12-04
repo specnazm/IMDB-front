@@ -2,8 +2,6 @@ import { call, put, select } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
 import { setMovies, addMovie, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres, setPopular } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
-import { DASHBOARD } from '../../routes';
-import { push, go } from 'connected-react-router';
 
 
 const getPageCount = state => state.movie.pageCount;
