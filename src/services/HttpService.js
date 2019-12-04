@@ -41,9 +41,16 @@ class HttpService {
 }
 
 const options = {
-  baseURL: config.API_BASE_URL
+  baseURL: config.API_BASE_URL,
+  headers: { common: {} }
 };
 
-const httpService = new HttpService(options);
+const optionsOMDB = {
+  baseURL: config.OMDB_BASE_URL,
+  headers: { common: {} }
+}
 
-export default httpService;
+
+export const httpService = new HttpService(options);
+
+export const httpServiceOMDB = new HttpService(optionsOMDB);

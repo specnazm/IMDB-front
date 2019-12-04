@@ -15,7 +15,8 @@ import {
   GET_POPULAR_MOVIES,
   ADD_MOVIE,
   SET_POPULAR_MOVIES,
-  CREATE_MOVIE
+  CREATE_MOVIE,
+  SEARCH_MOVIES_OMDB
  } from './ActionTypes';
 
 export const getMovies = (page, perPage) => {
@@ -145,3 +146,10 @@ export const createMovie = (payload)=> {
     payload
   }
 };
+
+export const searchMovieOMDB = payload => {
+  return {
+    type: SEARCH_MOVIES_OMDB,
+    payload
+  }
+}

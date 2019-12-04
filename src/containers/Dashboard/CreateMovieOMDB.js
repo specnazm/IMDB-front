@@ -5,26 +5,18 @@ import { Formik, Form, Field } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { FormattedMessage } from 'react-intl';
 import TextField from '@material-ui/core/TextField';
-import { createMovie } from '../../store/actions/MovieActions';
 import messages from './messages';
-import { search, getGenres } from '../../store/actions/MovieActions';
+import { searchMovieOMDB } from '../../store/actions/MovieActions';
 import Button from '@material-ui/core/Button';
 import { formStyle, submitButton } from '../../styles/FormStyle';
-import { newMovieSchema } from './validations.js';
 import { withFormikField } from '../../utils/withFormikField';
 
 const FormikTextField = withFormikField(TextField);
 
-class CreateMovieForm extends Component {
+class CreateMovieOMDB extends Component {
   
-  componentDidMount(){
-    if (this.props.genres.length == 0){
-      this.props.getGenres();
-    
-    }
-  }
   submit = (values) => {
-    this.props.createMovie(values);
+    this.props.searchMovieOMDB(values);
     this.props.handleClose();
   };
 
@@ -32,12 +24,10 @@ class CreateMovieForm extends Component {
     return (
         <Formik 
           initialValues={{
-            Title: '',
-            Genre: '',
-            Poster: '',
-            Plot: ''
+            title: '',
+            year: '',
+            plot: ''
           }}
-          validationSchema={newMovieSchema}
           onSubmit={this.submit}
           style={formStyle}>
           <Form>
@@ -46,7 +36,7 @@ class CreateMovieForm extends Component {
                 <Field
                   component={FormikTextField}
                   type="text"
-                  name="Title"
+                  name="title"
                   variant="outlined"
                   required
                   fullWidth
@@ -58,33 +48,21 @@ class CreateMovieForm extends Component {
               <Field
                 component={FormikTextField}
                 type="text"
-                name="Poster"
+                name="year"
                 variant="outlined"
-                required
                 fullWidth
-                label={<FormattedMessage {...messages.imageUrlInputLabel} />}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                component={FormikTextField}
-                type="text"
-                name="Plot"
-                variant="outlined"
-                required
-                fullWidth
-                label={<FormattedMessage {...messages.descriptionInputLabel} />}
+                label={<FormattedMessage {...messages.yearInputLabel} />}
               />
             </Grid>
             <Grid item xs={12}>
               <Field
                 as="select"
-                name="Genre"
+                name="plot"
                 variant="outlined"
                 required
-              >
-                <option value=''>None</option>
-                {this.props.genres.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option>)}
+                >
+                <option value="full">Full</option>
+                <option value=''>Short</option>
               </Field>
             </Grid>
           </Grid>
@@ -95,7 +73,7 @@ class CreateMovieForm extends Component {
             color="primary"
             style={submitButton}
           >
-          <FormattedMessage {...messages.createButton} />
+          <FormattedMessage {...messages.searchButton} />
         </Button>
         <Button
             size="small"
@@ -114,17 +92,16 @@ class CreateMovieForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    genres : state.search.genres 
   };
 };
 
 const mapDispatchToProps = {
-  createMovie, getGenres
+  searchMovieOMDB
 };
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CreateMovieForm)
+  )(CreateMovieOMDB)
 );

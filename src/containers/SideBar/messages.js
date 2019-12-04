@@ -14,5 +14,9 @@ export default defineMessages({
   addMovie: {
     id: `${scope}.addMovie.header`,
     defaultMessage: 'Add movie'
+  },
+  addMovieOMDB: {
+    id: `${scope}.addMovieOMDB.header`,
+    defaultMessage: 'Add movie from OMDB'
   }
 });

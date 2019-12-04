@@ -17,12 +17,11 @@ export default class MenuSideBar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { openModal: false };
+        this.state = { openModal: false, OMDB: false };
     }
 
-    handleOpen = () => {
-        console.log('here');
-       this.setState({ openModal: true })
+    handleOpen = (openOMDBForm) => {
+       this.setState({ openModal: true, OMDB: openOMDBForm })
     };
 
     handleClose = () => {
@@ -44,9 +43,19 @@ export default class MenuSideBar extends Component {
             <div style={drawerHeader}> 
             <Typography variant="h6" noWrap>
                     <FormattedMessage {...messages.addMovie} />
-                </Typography>
-                <IconButton onClick={this.handleOpen}><AddIcon /></IconButton>
-                <CreateMovie open={this.state.openModal} handleClose={this.handleClose}></CreateMovie>
+            </Typography>
+            <IconButton onClick={() => this.handleOpen(false)}><AddIcon /></IconButton>
+            </div>
+            <div style={drawerHeader}> 
+            <Typography variant="h6" noWrap>
+                    <FormattedMessage {...messages.addMovieOMDB} />
+            </Typography>
+            <IconButton onClick={() => this.handleOpen(true)}><AddIcon /></IconButton>
+            <CreateMovie 
+                open={this.state.openModal} 
+                handleClose={this.handleClose}
+                OMDB={this.state.OMDB}
+            />
             </div>
             <Divider />
             <div style={drawerHeader}>
@@ -56,7 +65,7 @@ export default class MenuSideBar extends Component {
             </div>
             <Divider />
             <Search />
-            <SearchResult />
+            <SearchResult OMDB={this.state.OMDB}/>
         </Drawer>
      );
     }   

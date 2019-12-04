@@ -1,5 +1,7 @@
 import ApiService from './ApiService';
 import { POPULAR_LIMIT } from '../utils/constants';
+import {  httpServiceOMDB } from './HttpService';
+
 
 const ENDPOINTS = {
   MOVIES: '/api/movies',
@@ -13,6 +15,11 @@ const ENDPOINTS = {
 
 class MovieService extends ApiService {
 
+  constructor() {
+    super();
+    this.apiOMDB = httpServiceOMDB;
+    this.apiOMDBClient = this.apiOMDB.client;
+  }
   getMovies = (page, perPage) => {
      return this.apiClient.get(ENDPOINTS.MOVIES, {
       params: {
@@ -58,14 +65,26 @@ class MovieService extends ApiService {
     });
   };
 
-  createMovie = ({title, description, imageUrl, genre}) => {
+  createMovie = ({Title: title, Plot : description, Poster: image_url, Genre: genre_id}) => {
+
     return this.apiClient.post(ENDPOINTS.MOVIES, {
       title,
       description,
-      image_url: imageUrl,
-      genre_id: genre
+      image_url,
+      genre_id
     });
   };
+
+  getMoviesOMDB = ({title, year, plot }) => {
+    return this.apiOMDBClient.get('', {
+      headers: {},
+      params: {
+        t: title,
+        y: year,
+        plot
+      }
+    });
+ };
 
 }
 

@@ -11,9 +11,17 @@ export default defineMessages({
     id: `${scope}.text.create_movie_title`,
     defaultMessage: 'Create new movie'
   },
+  createMovieOMDBTitle: {
+    id: `${scope}.text.create_movie_OMDB_title`,
+    defaultMessage: 'Search for movie in OMDB'
+  },
   createButton: {
     id: `${scope}.button.create`,
     defaultMessage: 'Add'
+  },
+  searchButton: {
+    id: `${scope}.button.search`,
+    defaultMessage: 'Search'
   },
   cancelButton: {
     id: `${scope}.button.cancel`,
@@ -35,9 +43,9 @@ export default defineMessages({
     id: `${scope}.input_label.imageUrl`,
     defaultMessage: 'Image url'
   },
-  passwordConfirmInputLabel: {
-    id: `${scope}.input_label.password_confirm`,
-    defaultMessage: 'Password confirmation'
+  yearInputLabel: {
+    id: `${scope}.input_label.year`,
+    defaultMessage: 'Year'
   }
 
 });

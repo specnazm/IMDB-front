@@ -14,8 +14,9 @@ import Divider from '@material-ui/core/Divider';
 import { register } from '../../store/actions/AuthActions';
 import messages from './messages';
 import { paper, avatar } from '../../styles/FormStyle';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import MovieCreationOutlinedIcon from '@material-ui/icons/MovieCreationOutlined';
 import CreateMovieForm from './CreateMovieForm';
+import CreateMovieOMDB from './CreateMovieOMDB';
 import Modal from '@material-ui/core/Modal';
 
 class CreateMovie extends Component {
@@ -34,14 +35,16 @@ class CreateMovie extends Component {
                 </Helmet>
                 <Paper style={paper}>
                 <Avatar style={avatar}>
-                    <LockOutlinedIcon />
+                    <MovieCreationOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     <FormattedMessage {...messages.createMovieTitle} />
                 </Typography>
                 <Grid>
                     <Divider />
-                    <CreateMovieForm handleClose={this.props.handleClose}/>
+                    {this.props.OMDB ?
+                    <CreateMovieOMDB handleClose={this.props.handleClose}/> :
+                    <CreateMovieForm handleClose={this.props.handleClose}/>}
                 </Grid>
                 </Paper>
             </Container>

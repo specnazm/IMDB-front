@@ -28,3 +28,5 @@ export const SET_POPULAR_MOVIES = 'SET_POPULAR_MOVIES';
 
 export const CREATE_MOVIE = 'CREATE_MOVIE';
 export const ADD_MOVIE = 'ADD_MOVIE';
+
+export const SEARCH_MOVIES_OMDB = 'SEARCH_MOVIES_OMDB';
