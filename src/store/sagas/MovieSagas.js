@@ -14,11 +14,11 @@ export function* moviesGet(action) {
       movie.user_reaction = getReaction(movie);
       movie.genre = getGenre(movie);
     });
-    yield put(setMovies(data));
-    yield put(setSelected(null));
-    const pageCount = yield select(getPageCount);
-    if (!pageCount )
-      yield put(setPageCount(data));
+      yield put(setMovies(data));
+      yield put(setSelected(null));
+      const pageCount = yield select(getPageCount);
+      if (!pageCount)
+        yield put(setPageCount(data));
   } catch (error) {
     console.log({ error });
   }

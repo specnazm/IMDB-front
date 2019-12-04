@@ -48,9 +48,9 @@ import { connect } from 'react-redux';
 }
 
 const mapStateToProps = state => {
-  return {
-    pageCount: state.movie.pageCount || 1,
-    movies: state.movie.all
+    return {
+      pageCount: state.movie.pageCount || 1,
+      movies: state.movie.all
   };
 };
 
