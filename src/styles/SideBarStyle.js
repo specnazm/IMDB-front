@@ -15,5 +15,5 @@ export const drawerHeader = {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    justifyContent: 'flex-end',
+    justifyContent: 'left',
 }

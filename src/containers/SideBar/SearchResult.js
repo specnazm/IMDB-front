@@ -6,7 +6,8 @@ import List from '@material-ui/core/List';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { connect } from 'react-redux';
-import { search } from '../../store/actions/MovieActions';
+import Button from '@material-ui/core/Button';
+import { search, createMovie } from '../../store/actions/MovieActions';
 import { PER_PAGE } from '../../utils/constants';
 import { SINGLE_MOVIE_PAGE } from '../../routes';
 
@@ -30,15 +31,25 @@ import { SINGLE_MOVIE_PAGE } from '../../routes';
   render() {
     return (
       <div >
+        {this.props.OMDB ?   
         <List>
-            {this.props.searchResult.map( movie => (
-            <ListItem key={movie.id}>
-              <Link component={RouterLink} to={SINGLE_MOVIE_PAGE.replace(':id', movie.id)} variant="body2">
-                {movie.title}
-             </Link>
-            </ListItem>
+        {this.props.searchResult.map( movie => (   
+          <ListItem key={movie.Title}>
+            {movie.Title} , {movie.Year}
+            <Button onClick={() => this.props.createMovie(movie)}>Add movie</Button>
+          </ListItem>
+      ))}
+      </List> 
+      :
+        <List>
+            {this.props.searchResult.map( movie => (   
+              <ListItem key={movie.id}>
+                <Link component={RouterLink} to={SINGLE_MOVIE_PAGE.replace(':id', movie.id)} variant="body2">
+                  {movie.title}
+              </Link>
+              </ListItem>
           ))}
-        </List>
+        </List> }
         {this.props.pageCount > 1  && <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
@@ -51,8 +62,8 @@ import { SINGLE_MOVIE_PAGE } from '../../routes';
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
           activeClassName={'active'}
-      /> }
-      </div>
+      /> }: 
+      </div> 
     );
   }
 }
@@ -66,7 +77,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    search
+    search, createMovie
 };
 
 export default withRouter(

@@ -52,9 +52,6 @@ class MovieCard extends Component  {
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button size="small" color="primary">
-        Like
-      </Button>
       <Button 
           component={RouterLink}
           to={SINGLE_MOVIE_PAGE.replace(":id", id)}

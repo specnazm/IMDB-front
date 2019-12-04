@@ -1,7 +1,10 @@
 import { call, put, select } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
-import { setMovies, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres, setPopular } from '../actions/MovieActions';
+import { setMovies, addMovie, setPageCount, setSelected, setReaction, setReactionSelected, setSearchResult, setSearchPageCount, setGenres, setPopular } from '../actions/MovieActions';
 import { getReaction, getGenre } from '../../utils/utils';
+import { DASHBOARD } from '../../routes';
+import { push, go } from 'connected-react-router';
+
 
 const getPageCount = state => state.movie.pageCount;
 const getSelected = state => state.movie.selected;
@@ -75,6 +78,24 @@ export function* popularGet(action) {
   try {
     const { data } = yield call(() => movieService.getPopular());
     yield put(setPopular(data));
+  } catch (error) {
+    console.log({ error });
+  }
+}
+
+export function* movieCreate(action) {
+  try {
+    const { data } = yield call(() => movieService.createMovie(action.payload));
+    yield put(addMovie(data));
+  } catch (error) {
+    console.log({ error });
+  }
+}
+
+export function* searchOMDB(action) {
+  try {
+    const response = yield call(() => movieService.getMoviesOMDB(action.payload));
+    yield put(setSearchResult([response.data], null));
   } catch (error) {
     console.log({ error });
   }

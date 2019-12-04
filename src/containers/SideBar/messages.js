@@ -10,5 +10,13 @@ export default defineMessages({
   popularMoviesHeader: {
     id: `${scope}.popularMovies.header`,
     defaultMessage: 'Most popular movies '
+  },
+  addMovie: {
+    id: `${scope}.addMovie.header`,
+    defaultMessage: 'Add movie'
+  },
+  addMovieOMDB: {
+    id: `${scope}.addMovieOMDB.header`,
+    defaultMessage: 'Add movie from OMDB'
   }
 });

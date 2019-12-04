@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 import { push, go } from 'connected-react-router';
-
 import { authUser, loginError, registerError } from '../actions/AuthActions';
 import AuthService from '../../services/AuthService';
 import { DASHBOARD, LOGIN } from '../../routes';
+
 
 export function* userLogin({ payload }) {
   try {

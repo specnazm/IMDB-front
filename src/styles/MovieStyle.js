@@ -1,5 +1,5 @@
 export const card =  {
-    maxWidth: 345
+    width: 345
 };
 export const media =  {
     height: 140

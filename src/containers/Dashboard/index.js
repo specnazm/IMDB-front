@@ -15,7 +15,7 @@ import messages from './messages';
 import { getMovies, setSearchResult, setSearchPageCount } from '../../store/actions/MovieActions';
 import { container, menuButton, menuButtonHide, appBar, appBarShift } from '../../styles/DashboardStyle';
 import { PER_PAGE } from '../../utils/constants';
-import SearchSideBar from '../SideBar/SearchSideBar';
+import MenuSideBar from '../SideBar/MenuSideBar';
 import SideBar from '../SideBar';
 
 
@@ -61,7 +61,7 @@ class Dashboard extends Component {
           </Typography>
           </Toolbar>
         </AppBar>
-        <SearchSideBar open = {this.state.open}  handleClose = {this.handleSideBarClose} handleOpen={this.handleSideBarOpen}/>
+        <MenuSideBar open = {this.state.open}  handleClose = {this.handleSideBarClose} handleOpen={this.handleSideBarOpen}/>
         <SideBar />
         <Typography variant="h2" component="h1" gutterBottom style={this.state.open ? appBarShift: appBar} >
           <Page  perPage={PER_PAGE} />

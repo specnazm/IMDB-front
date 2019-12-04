@@ -1,4 +1,5 @@
 import ApiService from './ApiService';
+import config from '../config';
 
 const ENDPOINTS = {
   LOGIN: '/api/auth/login',
@@ -23,6 +24,7 @@ class AuthService extends ApiService {
   };
 
   setAuthorizationHeader = () => {
+    if (this.apiClient.defaults.baseURL === config.API_BASE_URL);
     const token = this.getToken();
     if (token) {
       this.api.attachHeaders({
